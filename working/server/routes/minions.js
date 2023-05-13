@@ -1,8 +1,10 @@
 const express = require('express');
 const minionsRouter = express.Router();
+const {getAllFromDatabase} = require('../db')
 
 minionsRouter.get('/', (req, res) => {
-   res.status(200).json({ success: true, data: "it worked for minions!" })
+   const minionsData = getAllFromDatabase('minions')
+   res.status(200).json({ success: true, data: minionsData })
 })
 
 module.exports = minionsRouter;
