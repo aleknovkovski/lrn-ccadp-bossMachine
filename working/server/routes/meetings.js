@@ -5,7 +5,7 @@ const {
    getAllFromDatabase,
    addToDatabase,
    deleteFromDatabasebyId,
-   createMeeting
+   createMeeting, deleteAllFromDatabase
 } = require("../db");
 
 meetingsRouter.get('/', (req, res) => {
@@ -21,6 +21,11 @@ meetingsRouter.delete('/:meetingId', (req, res, next) => {
   const meetingID = String(req.params.meetingId)
   let deletedSuccessfully = deleteFromDatabasebyId('meetings', meetingID);
   res.status(201).send(deletedSuccessfully);
+});
+
+meetingsRouter.delete('/', (req, res, next) => {
+  let deletedSuccessfully = deleteAllFromDatabase('meetings');
+  res.status(204).send(deletedSuccessfully);
 });
 
 module.exports = meetingsRouter;
