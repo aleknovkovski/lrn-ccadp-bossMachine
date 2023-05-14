@@ -6,6 +6,7 @@ const {
    updateInstanceInDatabase,
    deleteFromDatabasebyId
 } = require("../db");
+const checkMillionDollarIdea = require("../checkMillionDollarIdea");
 const ideasRouter = express.Router();
 
 ideasRouter.get('/', (req, res) => {
@@ -19,12 +20,12 @@ ideasRouter.get('/:ideaId', (req, res) => {
    res.status(200).send(ideaData)
 })
 
-ideasRouter.post('/', (req, res) => {
+ideasRouter.post('/', checkMillionDollarIdea, (req, res) => {
   const newIdea = addToDatabase('ideas', req.body);
   res.status(201).send(newIdea);
 })
 
-ideasRouter.put('/:ideaId', (req, res, next) => {
+ideasRouter.put('/:ideaId', checkMillionDollarIdea, (req, res, next) => {
   req.body.id = String(req.params.ideaId)
   let updatedIdeaInstance = updateInstanceInDatabase('ideas', req.body);
   res.status(201).send(updatedIdeaInstance);
