@@ -5,7 +5,7 @@ const {
    getAllFromDatabase,
    addToDatabase,
    deleteFromDatabasebyId,
-   createMeeting, deleteAllFromDatabase
+   createMeeting, deleteAllFromDatabase, getFromDatabaseById
 } = require("../db");
 
 meetingsRouter.get('/', (req, res) => {
